@@ -9,13 +9,13 @@
 ### 使用 pip 安装
 
 ```bash
-pip install a2a
+pip install pya2a
 ```
 
 ### 使用 Poetry 安装
 
 ```bash
-poetry add a2a
+poetry add pya2a
 ```
 
 ## 快速开始

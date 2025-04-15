@@ -9,13 +9,13 @@ This document will help you get started with the A2A SDK.
 ### Using pip
 
 ```bash
-pip install a2a
+pip install pya2a
 ```
 
 ### Using Poetry
 
 ```bash
-poetry add a2a
+poetry add pya2a
 ```
 
 ## Quick Start

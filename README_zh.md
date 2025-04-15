@@ -9,7 +9,7 @@ Agent to Agent Protocol Python SDK - 支持 Python 3.8-3.13 的工具库
 使用 pip 安装：
 
 ```bash
-pip install a2a
+pip install pya2a
 ```
 
 ## 功能特点
