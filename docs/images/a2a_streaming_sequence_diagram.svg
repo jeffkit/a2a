@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="1800" viewBox="0 0 1200 1800">
+  <style>
+    .title {
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      text-anchor: middle;
+    }
+    .subtitle {
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      font-style: italic;
+      text-anchor: middle;
+    }
+    .actor {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      text-anchor: middle;
+    }
+    .lifeline {
+      stroke: #AAAAAA;
+      stroke-width: 1;
+      stroke-dasharray: 5,5;
+    }
+    .message {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      text-anchor: middle;
+    }
+    .arrowhead {
+      stroke: black;
+      fill: black;
+    }
+    .messageline {
+      stroke: black;
+      stroke-width: 1.5;
+      marker-end: url(#arrowhead);
+    }
+    .returnline {
+      stroke: #0000AA;
+      stroke-width: 1.5;
+      stroke-dasharray: 2,2;
+      marker-end: url(#returnarrow);
+    }
+    .streamline {
+      stroke: #00AA00;
+      stroke-width: 2;
+      marker-end: url(#streamingarrow);
+    }
+    .activation {
+      fill: #EEEEEE;
+      stroke: #888888;
+      stroke-width: 1;
+    }
+    .note {
+      fill: #FFFFCC;
+      stroke: #999999;
+      stroke-width: 1;
+    }
+    .notetext {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      text-anchor: middle;
+    }
+    .section {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      fill: #444444;
+      text-anchor: middle;
+    }
+    .asyncline {
+      stroke: #00AA00;
+      stroke-width: 1.5;
+      stroke-dasharray: 4,2;
+      marker-end: url(#asyncarrow);
+    }
+  </style>
+  
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrowhead"/>
+    </marker>
+    <marker id="returnarrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0000AA"/>
+    </marker>
+    <marker id="streamingarrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00AA00"/>
+    </marker>
+    <marker id="asyncarrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#00AA00"/>
+    </marker>
+  </defs>
+  
+  <!-- 标题 -->
+  <text x="600" y="40" class="title">A2A 流式调用详细时序图</text>
+  <text x="600" y="70" class="subtitle">异步任务处理与服务器组件交互</text>
+  
+  <!-- 角色定义 -->
+  <rect x="50" y="100" width="120" height="60" rx="5" ry="5" fill="#EEEEFF" stroke="#9999CC"/>
+  <text x="110" y="135" class="actor">Client</text>
+  <line x1="110" y1="160" x2="110" y2="1750" class="lifeline"/>
+  
+  <rect x="200" y="100" width="120" height="60" rx="5" ry="5" fill="#EEFFEE" stroke="#99CC99"/>
+  <text x="260" y="135" class="actor">A2AServer</text>
+  <line x1="260" y1="160" x2="260" y2="1750" class="lifeline"/>
+  
+  <rect x="350" y="100" width="120" height="60" rx="5" ry="5" fill="#FFEEEE" stroke="#CC9999"/>
+  <text x="410" y="135" class="actor">TaskManager</text>
+  <line x1="410" y1="160" x2="410" y2="1750" class="lifeline"/>
+  
+  <rect x="500" y="100" width="120" height="60" rx="5" ry="5" fill="#FFFFEE" stroke="#CCCC99"/>
+  <text x="560" y="135" class="actor">Storage</text>
+  <line x1="560" y1="160" x2="560" y2="1750" class="lifeline"/>
+  
+  <rect x="650" y="100" width="120" height="60" rx="5" ry="5" fill="#EEFFFF" stroke="#99CCCC"/>
+  <text x="710" y="135" class="actor">HistoryProvider</text>
+  <line x1="710" y1="160" x2="710" y2="1750" class="lifeline"/>
+  
+  <rect x="800" y="100" width="120" height="60" rx="5" ry="5" fill="#FFEEFF" stroke="#CC99CC"/>
+  <text x="860" y="135" class="actor">Agent</text>
+  <line x1="860" y1="160" x2="860" y2="1750" class="lifeline"/>
+  
+  <rect x="950" y="100" width="120" height="60" rx="5" ry="5" fill="#FFFFDD" stroke="#CCCCAA"/>
+  <text x="1010" y="135" class="actor">ResponseProcessor</text>
+  <line x1="1010" y1="160" x2="1010" y2="1750" class="lifeline"/>
+  
+  <!-- 第一部分: 流式调用初始化 -->
+  <text x="600" y="200" class="section">1. 流式调用初始化</text>
+  
+  <!-- 客户端发送流式请求 -->
+  <rect x="100" y="220" width="20" height="1500" class="activation"/>
+  <rect x="250" y="250" width="20" height="1450" class="activation"/>
+  <line x1="120" y1="250" x2="250" y2="250" class="messageline"/>
+  <text x="185" y="240" class="message">send_task_streaming({id, session_id, message})</text>
+  
+  <!-- 服务器处理请求 -->
+  <rect x="400" y="280" width="20" height="1400" class="activation"/>
+  <line x1="270" y1="280" x2="400" y2="280" class="messageline"/>
+  <text x="335" y="270" class="message">on_send_task_subscribe(request)</text>
+  
+  <!-- TaskManager创建/更新任务 -->
+  <rect x="550" y="310" width="20" height="80" class="activation"/>
+  <line x1="420" y1="310" x2="550" y2="310" class="messageline"/>
+  <text x="485" y="300" class="message">_upsert_task(task_params)</text>
+  
+  <!-- Storage存储任务 -->
+  <line x1="550" y1="370" x2="420" y2="370" class="returnline"/>
+  <text x="485" y="360" class="message">返回任务</text>
+  
+  <!-- 更新任务状态为"处理中" -->
+  <rect x="550" y="400" width="20" height="70" class="activation"/>
+  <line x1="420" y1="400" x2="550" y2="400" class="messageline"/>
+  <text x="485" y="390" class="message">_update_task_status(WORKING)</text>
+  
+  <line x1="550" y1="450" x2="420" y2="450" class="returnline"/>
+  <text x="485" y="440" class="message">返回更新后的任务</text>
+  
+  <!-- 设置SSE订阅 -->
+  <rect x="390" y="480" width="40" height="40" class="note"/>
+  <text x="410" y="505" class="notetext">创建SSE队列<br/>_setup_sse_consumer</text>
+  
+  <!-- 启动异步任务处理 -->
+  <rect x="390" y="530" width="40" height="40" class="note"/>
+  <text x="410" y="555" class="notetext">创建异步任务<br/>_process_streaming_task</text>
+  
+  <!-- 返回SSE连接 -->
+  <line x1="400" y1="580" x2="270" y2="580" class="returnline"/>
+  <text x="335" y="570" class="message">返回SSE通道</text>
+  
+  <line x1="250" y1="610" x2="120" y2="610" class="returnline"/>
+  <text x="185" y="600" class="message">建立SSE连接</text>
+  
+  <!-- 第二部分: 异步任务处理 -->
+  <text x="600" y="650" class="section">2. 异步任务处理</text>
+  
+  <!-- 处理消息 -->
+  <rect x="430" y="680" width="20" height="1000" class="activation"/>
+  
+  <path d="M 420,560 C 440,580 440,680 430,680" fill="none" stroke="#00AA00" stroke-width="1.5" stroke-dasharray="4,2"/>
+  <text x="500" y="630" class="message" fill="#008800">异步执行 _process_streaming_task</text>
+  
+  <!-- 通知状态更新 -->
+  <line x1="430" y1="720" x2="120" y2="720" class="streamline"/>
+  <text x="275" y="710" class="message">发送状态更新(WORKING)</text>
+  
+  <!-- 获取历史记录 -->
+  <rect x="700" y="750" width="20" height="70" class="activation"/>
+  <line x1="450" y1="750" x2="700" y2="750" class="messageline"/>
+  <text x="575" y="740" class="message">get_history(session_id)</text>
+  
+  <line x1="700" y1="800" x2="450" y2="800" class="returnline"/>
+  <text x="575" y="790" class="message">返回历史记录</text>
+  
+  <!-- 保存用户消息到历史 -->
+  <rect x="700" y="830" width="20" height="40" class="activation"/>
+  <line x1="450" y1="830" x2="700" y2="830" class="messageline"/>
+  <text x="575" y="820" class="message">add_message(session_id, user_message)</text>
+  
+  <!-- 调用Agent流式处理 -->
+  <rect x="850" y="880" width="20" height="350" class="activation"/>
+  <line x1="450" y1="880" x2="850" y2="880" class="messageline"/>
+  <text x="650" y="870" class="message">stream(message, session_id, history)</text>
+  
+  <!-- 流式响应处理循环 -->
+  <rect x="840" y="920" width="40" height="40" class="note"/>
+  <text x="860" y="945" class="notetext">开始生成<br/>流式响应</text>
+  
+  <!-- 流式响应项1 -->
+  <line x1="850" y1="970" x2="450" y2="970" class="streamline"/>
+  <text x="650" y="960" class="message">流式响应项 1</text>
+  
+  <!-- 处理流式响应项1 -->
+  <rect x="1000" y="990" width="20" height="40" class="activation"/>
+  <line x1="450" y1="990" x2="1000" y2="990" class="messageline"/>
+  <text x="725" y="980" class="message">process_stream_item(stream_item_1)</text>
+  
+  <line x1="1000" y1="1010" x2="450" y2="1010" class="returnline"/>
+  <text x="725" y="1000" class="message">返回(state, message, artifacts, is_final=false)</text>
+  
+  <!-- 发送响应给客户端 -->
+  <line x1="450" y1="1040" x2="120" y2="1040" class="streamline"/>
+  <text x="285" y="1030" class="message">发送部分响应(stream_item_1)</text>
+  
+  <!-- 更多流式响应项... -->
+  <line x1="850" y1="1070" x2="450" y2="1070" class="streamline"/>
+  <text x="650" y="1060" class="message">流式响应项 2...</text>
+  
+  <!-- 更多处理和发送... -->
+  <rect x="1000" y="1090" width="20" height="40" class="activation"/>
+  <line x1="450" y1="1090" x2="1000" y2="1090" class="messageline"/>
+  <text x="725" y="1080" class="message">process_stream_item(stream_item_2...)</text>
+  
+  <line x1="1000" y1="1110" x2="450" y2="1110" class="returnline"/>
+  <text x="725" y="1100" class="message">返回(state, message, artifacts, is_final=false)</text>
+  
+  <!-- 发送更多响应给客户端 -->
+  <line x1="450" y1="1140" x2="120" y2="1140" class="streamline"/>
+  <text x="285" y="1130" class="message">发送部分响应(stream_item_2...)</text>
+  
+  <!-- 最终流式响应项 -->
+  <line x1="850" y1="1170" x2="450" y2="1170" class="streamline"/>
+  <text x="650" y="1160" class="message">最终流式响应项</text>
+  
+  <!-- 处理最终流式响应项 -->
+  <rect x="1000" y="1190" width="20" height="40" class="activation"/>
+  <line x1="450" y1="1190" x2="1000" y2="1190" class="messageline"/>
+  <text x="725" y="1180" class="message">process_stream_item(final_stream_item)</text>
+  
+  <line x1="1000" y1="1210" x2="450" y2="1210" class="returnline"/>
+  <text x="725" y="1200" class="message">返回(state, message, artifacts, is_final=true)</text>
+  
+  <!-- 流式处理完成 -->
+  <line x1="850" y1="1230" x2="450" y2="1230" class="returnline"/>
+  <text x="650" y="1220" class="message">流式处理完成</text>
+  
+  <!-- 第三部分: 最终化处理 -->
+  <text x="600" y="1270" class="section">3. 最终化流式任务</text>
+  
+  <!-- 保存最终助手回复到历史 -->
+  <rect x="700" y="1300" width="20" height="40" class="activation"/>
+  <line x1="450" y1="1300" x2="700" y2="1300" class="messageline"/>
+  <text x="575" y="1290" class="message">add_message(session_id, accumulated_response)</text>
+  
+  <!-- 更新任务状态为"已完成" -->
+  <rect x="550" y="1350" width="20" height="70" class="activation"/>
+  <line x1="450" y1="1350" x2="550" y2="1350" class="messageline"/>
+  <text x="500" y="1340" class="message">_update_task_status(COMPLETED)</text>
+  
+  <line x1="550" y1="1400" x2="450" y2="1400" class="returnline"/>
+  <text x="500" y="1390" class="message">返回更新后的任务</text>
+  
+  <!-- 发送最终状态更新 -->
+  <rect x="430" y="1430" width="40" height="40" class="note"/>
+  <text x="450" y="1455" class="notetext">_enqueue_events_for_sse<br/>(final=true)</text>
+  
+  <!-- 发送最终响应给客户端 -->
+  <line x1="450" y1="1480" x2="120" y2="1480" class="streamline"/>
+  <text x="285" y="1470" class="message">发送最终状态(COMPLETED, final=true)</text>
+  
+  <!-- 异步任务处理结束 -->
+  <line x1="430" y1="1520" x2="410" y2="1520" class="returnline"/>
+  <text x="440" y="1510" class="message">异步任务完成</text>
+  
+  <!-- 客户端关闭SSE连接 -->
+  <rect x="100" y="1550" width="40" height="40" class="note"/>
+  <text x="120" y="1575" class="notetext">检测到final标志<br/>关闭SSE连接</text>
+  
+  <line x1="120" y1="1600" x2="250" y2="1600" class="messageline"/>
+  <text x="185" y="1590" class="message">关闭SSE连接</text>
+  
+  <line x1="250" y1="1630" x2="400" y2="1630" class="messageline"/>
+  <text x="325" y="1620" class="message">清理SSE资源</text>
+  
+  <rect x="390" y="1660" width="40" height="40" class="note"/>
+  <text x="410" y="1685" class="notetext">移除SSE订阅者</text>
+  
+  <!-- 完成流程 -->
+  <text x="600" y="1740" class="section">流式处理完成</text>
+</svg> 

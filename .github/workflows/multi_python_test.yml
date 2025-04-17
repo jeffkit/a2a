@@ -1,0 +1,59 @@
+name: 多Python版本测试
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ['3.8', '3.9', '3.10', '3.11', '3.12', '3.13-dev']
+      fail-fast: false
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: 设置Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ matrix.python-version }}
+    
+    - name: 安装Poetry
+      run: |
+        curl -sSL https://install.python-poetry.org | python3 -
+        poetry --version
+    
+    - name: 安装依赖
+      run: |
+        poetry install
+    
+    - name: 检查代码格式
+      run: |
+        poetry run black --check a2a tests
+    
+    - name: 检查代码风格
+      run: |
+        poetry run ruff a2a tests
+    
+    - name: 类型检查
+      run: |
+        poetry run mypy a2a
+    
+    - name: 运行测试
+      run: |
+        poetry run pytest -v
+    
+    - name: 上传测试结果
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results-${{ matrix.python-version }}
+        path: |
+          .coverage
+          htmlcov/
+        retention-days: 5 

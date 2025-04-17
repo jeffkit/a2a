@@ -1,0 +1,26 @@
+# A2A SDK Dependency Requirements for Examples
+
+# Core requirements
+requests>=2.28.0
+fastapi>=0.100.0
+uvicorn>=0.23.0
+
+# OpenAI examples
+openai>=1.0.0
+
+# LangChain examples
+langchain>=0.0.267
+langchain-core>=0.1.0
+langchain-openai>=0.0.1
+langchain-community>=0.0.1
+
+# AutoGen examples
+pyautogen>=0.2.0
+
+# Redis storage for framework-agnostic example
+redis>=4.5.5
+
+# 其他工具
+python-dotenv>=1.0.0
+matplotlib>=3.7.1
+numpy>=1.24.0

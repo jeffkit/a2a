@@ -111,6 +111,40 @@ poetry shell
 poetry run pytest
 ```
 
+### 多Python版本测试
+
+本项目支持Python 3.8-3.13多版本测试。有以下几种方式：
+
+#### 1. 使用tox（推荐）
+
+首先安装tox和tox-poetry插件：
+
+```bash
+pip install tox tox-poetry
+```
+
+然后运行测试：
+
+```bash
+tox
+```
+
+这将在`tox.ini`中配置的所有Python版本上运行测试。
+
+#### 2. 使用脚本
+
+我们提供了一个脚本来自动在多个Python版本上运行测试：
+
+```bash
+./scripts/run_tests_multi_python.sh
+```
+
+此脚本需要pyenv已安装，并且已安装了相应的Python版本。
+
+#### 3. GitHub Actions
+
+当您提交代码到仓库时，GitHub Actions会自动在多个Python版本上运行测试。您可以在GitHub仓库的Actions标签页中查看结果。
+
 ## 贡献指南
 
 欢迎提交 Pull Requests！请确保提交前：

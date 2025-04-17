@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pya2a"
-version = "0.1.0"
+version = "0.1.1"
 description = "A2A SDK - Agent to Agent Protocol Python SDK"
 authors = ["jeff_kit <bbmyth@gmail.com>"]
 readme = "README.md"

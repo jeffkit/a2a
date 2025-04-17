@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="1300" viewBox="0 0 1200 1300">
+  <style>
+    .title {
+      font-family: Arial, sans-serif;
+      font-size: 24px;
+      font-weight: bold;
+      text-anchor: middle;
+    }
+    .subtitle {
+      font-family: Arial, sans-serif;
+      font-size: 18px;
+      font-style: italic;
+      text-anchor: middle;
+    }
+    .actor {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      text-anchor: middle;
+    }
+    .lifeline {
+      stroke: #AAAAAA;
+      stroke-width: 1;
+      stroke-dasharray: 5,5;
+    }
+    .message {
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      text-anchor: middle;
+    }
+    .arrowhead {
+      stroke: black;
+      fill: black;
+    }
+    .messageline {
+      stroke: black;
+      stroke-width: 1.5;
+      marker-end: url(#arrowhead);
+    }
+    .returnline {
+      stroke: #0000AA;
+      stroke-width: 1.5;
+      stroke-dasharray: 2,2;
+      marker-end: url(#returnarrow);
+    }
+    .activation {
+      fill: #EEEEEE;
+      stroke: #888888;
+      stroke-width: 1;
+    }
+    .note {
+      fill: #FFFFCC;
+      stroke: #999999;
+      stroke-width: 1;
+    }
+    .notetext {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      text-anchor: middle;
+    }
+    .section {
+      font-family: Arial, sans-serif;
+      font-size: 16px;
+      font-weight: bold;
+      fill: #444444;
+      text-anchor: middle;
+    }
+    .highlight {
+      fill: #FFDDDD;
+      stroke: #DD9999;
+      stroke-width: 2;
+    }
+    .highlighttext {
+      font-family: Arial, sans-serif;
+      font-size: 12px;
+      font-weight: bold;
+      fill: #CC0000;
+      text-anchor: middle;
+    }
+  </style>
+  
+  <defs>
+    <marker id="arrowhead" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" class="arrowhead"/>
+    </marker>
+    <marker id="returnarrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0000AA"/>
+    </marker>
+  </defs>
+  
+  <!-- 标题 -->
+  <text x="600" y="40" class="title">A2A 会话ID处理逻辑时序图</text>
+  <text x="600" y="70" class="subtitle">首次请求 vs 后续请求</text>
+  
+  <!-- 角色定义 -->
+  <rect x="50" y="100" width="120" height="60" rx="5" ry="5" fill="#EEEEFF" stroke="#9999CC"/>
+  <text x="110" y="135" class="actor">Client</text>
+  <line x1="110" y1="160" x2="110" y2="1250" class="lifeline"/>
+  
+  <rect x="200" y="100" width="120" height="60" rx="5" ry="5" fill="#EEFFEE" stroke="#99CC99"/>
+  <text x="260" y="135" class="actor">A2AClient</text>
+  <line x1="260" y1="160" x2="260" y2="1250" class="lifeline"/>
+  
+  <rect x="350" y="100" width="120" height="60" rx="5" ry="5" fill="#EEFFFF" stroke="#99CCCC"/>
+  <text x="410" y="135" class="actor">A2AServer</text>
+  <line x1="410" y1="160" x2="410" y2="1250" class="lifeline"/>
+  
+  <rect x="500" y="100" width="120" height="60" rx="5" ry="5" fill="#FFEEEE" stroke="#CC9999"/>
+  <text x="560" y="135" class="actor">TaskManager</text>
+  <line x1="560" y1="160" x2="560" y2="1250" class="lifeline"/>
+  
+  <rect x="650" y="100" width="120" height="60" rx="5" ry="5" fill="#FFFFEE" stroke="#CCCC99"/>
+  <text x="710" y="135" class="actor">Storage</text>
+  <line x1="710" y1="160" x2="710" y2="1250" class="lifeline"/>
+  
+  <rect x="800" y="100" width="120" height="60" rx="5" ry="5" fill="#FFEEFF" stroke="#CC99CC"/>
+  <text x="860" y="135" class="actor">HistoryProvider</text>
+  <line x1="860" y1="160" x2="860" y2="1250" class="lifeline"/>
+  
+  <!-- 第一部分: 首次请求 (不提供session_id) -->
+  <text x="600" y="200" class="section">1. 首次请求 - 客户端不提供session_id</text>
+  
+  <!-- 客户端发送请求 -->
+  <rect x="100" y="220" width="20" height="430" class="activation"/>
+  <rect x="250" y="250" width="20" height="400" class="activation"/>
+  <line x1="120" y1="250" x2="250" y2="250" class="messageline"/>
+  <text x="185" y="240" class="message">send_task({id, message})</text>
+  
+  <!-- 注意：没有session_id -->
+  <rect x="240" y="260" width="40" height="40" class="highlight"/>
+  <text x="260" y="285" class="highlighttext">无session_id</text>
+  
+  <!-- 服务器处理请求 -->
+  <rect x="400" y="300" width="20" height="280" class="activation"/>
+  <line x1="270" y1="300" x2="400" y2="300" class="messageline"/>
+  <text x="335" y="290" class="message">HTTP POST /</text>
+  
+  <!-- 解析请求 -->
+  <rect x="390" y="320" width="40" height="40" class="note"/>
+  <text x="410" y="345" class="notetext">解析请求参数</text>
+  
+  <!-- 调用TaskManager -->
+  <rect x="550" y="370" width="20" height="170" class="activation"/>
+  <line x1="420" y1="370" x2="550" y2="370" class="messageline"/>
+  <text x="485" y="360" class="message">on_send_task(request)</text>
+  
+  <!-- TaskManager自动生成session_id -->
+  <rect x="540" y="390" width="40" height="40" class="highlight"/>
+  <text x="560" y="415" class="highlighttext">生成sessionId<br/>uuid4().hex</text>
+  
+  <!-- 调用Storage创建任务 -->
+  <rect x="700" y="440" width="20" height="60" class="activation"/>
+  <line x1="570" y1="440" x2="700" y2="440" class="messageline"/>
+  <text x="635" y="430" class="message">create_task({id, sessionId, ...})</text>
+  
+  <line x1="700" y1="480" x2="570" y2="480" class="returnline"/>
+  <text x="635" y="470" class="message">返回新任务</text>
+  
+  <!-- 返回结果(带session_id) -->
+  <line x1="550" y1="520" x2="420" y2="520" class="returnline"/>
+  <text x="485" y="510" class="message">返回(带session_id的任务)</text>
+  
+  <line x1="400" y1="550" x2="270" y2="550" class="returnline"/>
+  <text x="335" y="540" class="message">返回响应</text>
+  
+  <line x1="250" y1="580" x2="120" y2="580" class="returnline"/>
+  <text x="185" y="570" class="message">返回结果(包含session_id)</text>
+  
+  <!-- 客户端保存session_id -->
+  <rect x="100" y="600" width="40" height="40" class="highlight"/>
+  <text x="120" y="625" class="highlighttext">保存session_id<br/>用于后续请求</text>
+  
+  <!-- 第二部分: 后续请求 (提供session_id) -->
+  <text x="600" y="680" class="section">2. 后续请求 - 客户端提供session_id</text>
+  
+  <!-- 客户端发送请求 -->
+  <rect x="100" y="700" width="20" height="430" class="activation"/>
+  <rect x="250" y="730" width="20" height="400" class="activation"/>
+  <line x1="120" y1="730" x2="250" y2="730" class="messageline"/>
+  <text x="185" y="720" class="message">send_task({id, session_id, message})</text>
+  
+  <!-- 注意：提供session_id -->
+  <rect x="240" y="740" width="40" height="40" class="highlight"/>
+  <text x="260" y="765" class="highlighttext">包含session_id</text>
+  
+  <!-- 服务器处理请求 -->
+  <rect x="400" y="780" width="20" height="280" class="activation"/>
+  <line x1="270" y1="780" x2="400" y2="780" class="messageline"/>
+  <text x="335" y="770" class="message">HTTP POST /</text>
+  
+  <!-- 调用TaskManager -->
+  <rect x="550" y="820" width="20" height="200" class="activation"/>
+  <line x1="420" y1="820" x2="550" y2="820" class="messageline"/>
+  <text x="485" y="810" class="message">on_send_task(request)</text>
+  
+  <!-- TaskManager检查任务记录 -->
+  <rect x="700" y="860" width="20" height="60" class="activation"/>
+  <line x1="570" y1="860" x2="700" y2="860" class="messageline"/>
+  <text x="635" y="850" class="message">get_task(id)</text>
+  
+  <line x1="700" y1="900" x2="570" y2="900" class="returnline"/>
+  <text x="635" y="890" class="message">返回任务</text>
+  
+  <!-- 使用提供的session_id获取历史记录 -->
+  <rect x="850" y="930" width="20" height="50" class="activation"/>
+  <line x1="570" y1="930" x2="850" y2="930" class="messageline"/>
+  <text x="710" y="920" class="message">get_history(session_id)</text>
+  
+  <line x1="850" y1="960" x2="570" y2="960" class="returnline"/>
+  <text x="710" y="950" class="message">返回历史记录</text>
+  
+  <!-- 返回结果 -->
+  <line x1="550" y1="990" x2="420" y2="990" class="returnline"/>
+  <text x="485" y="980" class="message">返回任务结果</text>
+  
+  <line x1="400" y1="1030" x2="270" y2="1030" class="returnline"/>
+  <text x="335" y="1020" class="message">返回响应</text>
+  
+  <line x1="250" y1="1060" x2="120" y2="1060" class="returnline"/>
+  <text x="185" y="1050" class="message">返回结果</text>
+  
+  <!-- 总结说明 -->
+  <rect x="100" y="1130" width="900" height="100" rx="10" ry="10" fill="#EEEEEE" stroke="#999999"/>
+  <text x="550" y="1160" class="message" font-size="16" font-weight="bold">会话ID处理逻辑</text>
+  <text x="550" y="1190" class="message" font-size="14">1. 客户端首次请求时不提供session_id，TaskManager会自动生成并返回</text>
+  <text x="550" y="1220" class="message" font-size="14">2. 后续请求中，客户端提供之前获取的session_id，以维持对话上下文</text>
+</svg> 

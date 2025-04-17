@@ -69,6 +69,33 @@ poetry run mypy a2a
 poetry run pytest
 ```
 
+### Multi-Python Version Testing
+
+To ensure the code works across all supported Python versions (3.8-3.13), it's recommended to run tests on multiple versions:
+
+```bash
+# Using tox for multi-version testing
+pip install tox tox-poetry
+tox
+
+# Or using the provided script
+./scripts/run_tests_multi_python.sh
+```
+
+For local development, you can use pyenv to manage multiple Python versions:
+
+```bash
+# Install required Python versions
+pyenv install 3.8.x
+pyenv install 3.9.x
+pyenv install 3.10.x
+pyenv install 3.11.x
+pyenv install 3.12.x
+
+# Specify Python versions for the project
+pyenv local 3.8.x 3.9.x 3.10.x 3.11.x 3.12.x
+```
+
 5. Commit your changes
 
 ```bash
